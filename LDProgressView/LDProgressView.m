@@ -155,8 +155,12 @@
                 break;
         }
     }
-    CGContextSetStrokeColorWithColor(context, [[self.color darkerColor] darkerColor].CGColor);
-    [roundedRect stroke];
+    
+    if ([self.strokeProgressBar boolValue])
+    {
+        CGContextSetStrokeColorWithColor(context, [[self.color darkerColor] darkerColor].CGColor);
+        [roundedRect stroke];
+    }
 
     if ([self.showText boolValue]) {
         [self drawRightAlignedLabelInRect:insetRect];
@@ -238,13 +242,6 @@
     return _animate;
 }
 
-- (NSNumber *)showBackgroundShadow {
-    if (_showBackgroundShadow == nil) {
-        return @YES;
-    }
-    return _showBackgroundShadow;
-}
-
 - (NSNumber *)showText {
     if (_showText == nil) {
         return @YES;
@@ -288,6 +285,20 @@
         return [UIColor colorWithRed:0.51f green:0.51f blue:0.51f alpha:1.00f];
     }
     return _background;
+}
+
+- (NSNumber *)showBackgroundShadow {
+    if (_showBackgroundShadow == nil) {
+        return @YES;
+    }
+    return _showBackgroundShadow;
+}
+
+- (NSNumber *)strokeProgressBar {
+    if (_strokeProgressBar == nil) {
+        return @YES;
+    }
+    return _strokeProgressBar;
 }
 
 @end
